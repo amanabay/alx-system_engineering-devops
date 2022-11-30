@@ -6,3 +6,4 @@
 5-listfilesdigitonly - lists all files(including hidden) in long user and group 5-listfilesdigitonly - displays files(including hidden) in long format with user5-listfilesdigitonly
 6-firstdirectory
 7-movethatfile
+8-firstdelete
