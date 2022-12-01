@@ -1,2 +1,2 @@
 #!/bin/bash
-chmode --reference=hello olleh
+chmode --reference=olleh hello
