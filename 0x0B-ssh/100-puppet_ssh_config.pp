@@ -1,5 +1,4 @@
 # SSH config file using puppet
-
-Host *
-      PasswordAuthentication no
-      IdentifyFile ~/.ssh/school
+exec { 'echo "PasswordAuthentication no\nIdentityFile ~/.ssh/school" >> /etc/ssh/ssh_config':
+        path    => '/bin/'
+}
