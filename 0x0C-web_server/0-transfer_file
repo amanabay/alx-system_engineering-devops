@@ -15,4 +15,4 @@ KEY="$4"
 REMOTE_DIR="$HOME/"
 
 # Transfer file using scp
-scp -o StrictHostKeyChecking=no -i "$KEY" "$FILE" "$USER"@"$IP":"$REMOTE_DIR"
+scp -o "StrictHostKeyChecking=no" -i "$KEY" "$FILE" "$USER"@"$IP":"$REMOTE_DIR"
