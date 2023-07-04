@@ -7,7 +7,12 @@ sudo apt-get -y update
 sudo apt-get install -y nginx
 
 echo "
-server {
+events {
+
+}
+
+http {
+  server {
     listen 80;
 
     root /var/www/html;
@@ -16,6 +21,7 @@ server {
     location = / {
         echo "Hello World!";
     }
+  }
 }" > /etc/nginx/nginx.conf
 
 sudo service nginx start
