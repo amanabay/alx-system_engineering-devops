@@ -6,7 +6,8 @@ sudo apt-get -y update
 
 sudo apt-get install -y nginx
 
-echo "
+
+echo -e "
 events {
 
 }
@@ -22,6 +23,6 @@ http {
         echo "Hello World!";
     }
   }
-}" > /etc/nginx/nginx.conf
+}" | sudo tee /etc/nginx/nginx.conf > /dev/null
 
 sudo service nginx start
