@@ -2,8 +2,25 @@
 # Install nginx on web server listening on port 80 
 # and returns page containing Hello World
 
-sudo apt update -y
-sudo apt install -y nginx
-echo "Hello World!" > /var/www/html/index.html
-sudo sed -i 's/listen 80 default_server/listen 80/' /etc/nginx/sites-available/default
+sudo apt-get -y update
+
+sudo apt-get install -y nginx
+
+echo "
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location = / {
+        echo "Hello World!";
+    }
+}" > /etc/nginx/sites-available/default 
+
 sudo service nginx start
