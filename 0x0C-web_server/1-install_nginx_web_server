@@ -8,19 +8,14 @@ sudo apt-get install -y nginx
 
 echo "
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+    listen 80;
 
     root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
 
-    location / {
-        try_files $uri $uri/ =404;
-    }
-
     location = / {
         echo "Hello World!";
     }
-}" > /etc/nginx/sites-available/default 
+}" > /etc/nginx/nginx.conf
 
 sudo service nginx start
