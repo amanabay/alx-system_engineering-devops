@@ -6,23 +6,31 @@ sudo apt-get -y update
 
 sudo apt-get install -y nginx
 
-
-echo -e "
-events {
-
-}
-
-http {
-  server {
-    listen 80;
-
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-
-    location = / {
-        echo "Hello World!";
+if [ $? -eq 0 ]; then
+    # Configure Nginx
+    echo -e "
+    events {
+    
     }
-  }
-}" | sudo tee /etc/nginx/nginx.conf > /dev/null
 
-sudo service nginx start
+    http {
+        server {
+            listen 80;
+            location / {
+            }
+        }
+    }" | sudo tee /etc/nginx/nginx.conf > /dev/null
+    
+    echo 'Hello World!' > /var/www/html/index.html
+    sudo service nginx start
+
+    if [ $? -ne 0 ]; then
+        echo "Problem starting nginx"
+        exit 1
+    fi
+else
+    echo "Could not install nginx"
+    exit 1
+fi
+
+exit 0
