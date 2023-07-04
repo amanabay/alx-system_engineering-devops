@@ -2,34 +2,7 @@
 # Install nginx on web server listening on port 80 
 # and returns page containing Hello World
 
-sudo apt-get -y update
-
-sudo apt-get install -y nginx
-
-if [ $? -eq 0 ]; then
-    echo -e "
-    events {
-    
-    }
-
-    http {
-        server {
-            listen 80;
-            location / {
-            }
-        }
-    }" > /etc/nginx/nginx.conf
-    
-    echo 'Hello World!' > /var/www/html/index.html
-    sudo service nginx start
-
-    if [ $? -ne 0 ]; then
-        echo "Problem starting nginx"
-        exit 1
-    fi
-else
-    echo "Could not install nginx"
-    exit 1
-fi
-
-exit 0
+sudo apt update -y
+sudo apt install -y nginx
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo service nginx start
