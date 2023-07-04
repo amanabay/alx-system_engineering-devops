@@ -7,7 +7,6 @@ sudo apt-get -y update
 sudo apt-get install -y nginx
 
 if [ $? -eq 0 ]; then
-    # Configure Nginx
     echo -e "
     events {
     
@@ -19,7 +18,7 @@ if [ $? -eq 0 ]; then
             location / {
             }
         }
-    }" | sudo tee /etc/nginx/nginx.conf > /dev/null
+    }" > /etc/nginx/nginx.conf
     
     echo 'Hello World!' > /var/www/html/index.html
     sudo service nginx start
