@@ -1,9 +1,22 @@
 #!/usr/bin/env bash
 # Configure new server for web_02
 
+
+# configure a brand new NGINX server
+	
+
 sudo apt-get -y update
 sudo apt-get -y install nginx
+	
 sudo service nginx start
+
+echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/404.html	
+
+sed -i "/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+
+sed -i "/listen 80 default_server;/a error_page 404 /404.html;" /etc/nginx/sites-available/default
+
 sudo sed -i "11i\\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
-echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html
+
 sudo service nginx restart
