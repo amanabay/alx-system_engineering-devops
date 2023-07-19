@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Web stack debugging 2
+
+# Stop any instances of Apache running on port 8080
+sudo service apache2 stop
+sudo pkill apache2
+
+# Configure Nginx to listen on port 8080
+config="
+server {
+    listen 8080 default_server;
+    listen [::]:8080 default_server ipv6only=on;
+
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+
+    # Set the server name to localhost
+    server_name localhost;
+
+    location / {
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files \$uri \$uri/ =404;
+        # Uncomment to enable naxsi on this location
+        # include /etc/nginx/naxsi.rules
+    }
+}"
+printf "%s" "$config" > "/etc/nginx/sites-available/default"
+
+chown nginx /etc/nginx/nginx.conf
+chmod u+r /etc/nginx/nginx.conf
+
+# Restart Nginx as the nginx user
+sudo -u nginx service nginx restart
