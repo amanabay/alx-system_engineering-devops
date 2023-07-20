@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Web stack debugging 2
+sudo service apache2 stop
+sudo sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+chown nginx /etc/nginx/nginx.conf
+chmod u+r /etc/nginx/nginx.conf
+sudo -u nginx service nginx restart
