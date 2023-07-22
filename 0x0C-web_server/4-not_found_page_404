@@ -22,6 +22,6 @@ printf %s "server {
         root /usr/share/nginx/html;
         internal;
     }
-}" > /etc/nginx/sites-available/default
+}" > sudo tee /etc/nginx/sites-available/default
 
 sudo nginx -s reload
