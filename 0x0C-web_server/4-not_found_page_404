@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Install nginx and configure redirect me and error 404
 
 sudo apt-get -y update
