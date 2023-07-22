@@ -1,22 +1,29 @@
 #!/usr/bin/env bash
-# Configure new server for web_02
+# Configure web-02 similar to web-01
 
+sudo apt-get update
+sudo apt-get install -y nginx
 
-# configure a brand new NGINX server
-	
+sudo touch /var/www/html/index.html /var/www/html/404.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
-	
-sudo service nginx start
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    add_header X-Served-By $HOSTNAME;
+    root   /var/www/html/;
+    index  index.html index.htm;
 
-echo "Hello World!" > /var/www/html/index.html
-echo "Ceci n'est pas une page" > /var/www/html/404.html	
+    location /redirect_me {
+        return 301 https://www.my80stv.com;
+    }
 
-sed -i "/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+    error_page 404 /404.html;
+    location /404 {
+        root /var/www/html/;
+        internal;
+    }
+}" | sudo tee /etc/nginx/sites-available/default > /dev/null
 
-sed -i "/listen 80 default_server;/a error_page 404 /404.html;" /etc/nginx/sites-available/default
-
-sudo sed -i "11i\\\tadd_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
-
-sudo service nginx restart
+sudo nginx -s reload
