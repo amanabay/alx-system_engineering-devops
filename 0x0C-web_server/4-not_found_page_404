@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+# Install nginx and configure redirect me and error 404
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+echo "Hello World" | sudo tee /var/www/html/index.nginx-debian.html
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/404.html
+
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+
+    location /redirect_me {
+        return 301 http://www.my80stv.com;
+    }
+
+    error_page 404 /404.html;
+    location /404 {
+        root /usr/share/nginx/html;
+        internal;
+    }
+}" > /etc/nginx/sites-available/default
+
+sudo nginx -s reload
