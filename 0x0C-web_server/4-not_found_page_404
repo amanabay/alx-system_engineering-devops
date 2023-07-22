@@ -4,7 +4,7 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 
-echo "Hello World" | sudo tee /var/www/html/index.nginx-debian.html
+echo 'Holberton School' > /usr/share/nginx/html/index.html
 echo "Ceci n'est pas une page" > /usr/share/nginx/html/404.html
 
 printf %s "server {
