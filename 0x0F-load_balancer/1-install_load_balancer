@@ -6,7 +6,7 @@ sudo apt-get install -y haproxy
 
 sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bkp
 
-printf %s "
+printf %s "\
   frontend load_balancer
     bind *:80
     mode http
