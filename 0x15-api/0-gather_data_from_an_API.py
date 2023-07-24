@@ -22,7 +22,7 @@ if __name__ == "__main__":
     done_tasks = len(completed_tasks)
     total_tasks = len(todos)
 
-    print(f"Employee {name }done with tasks({done_tasks}/{total_tasks}):")
+    print(f"Employee {name} is done with tasks({done_tasks}/{total_tasks}):")
 
     for tasks in completed_tasks:
         print(f"\t {tasks}")
