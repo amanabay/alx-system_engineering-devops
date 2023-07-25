@@ -18,10 +18,8 @@ if __name__ == "__main__":
     user_name = user.get('username')
     file_name = f"{user_id}.csv"
 
-    with open(file_name, 'w', newline="") as file:
-        writer = csv.writer(file, quoting=csv.QUOTE_ALL)
-
-        for task in todos:
-            writer.writerow([user_id, user_name,
-                            task.get('completed'),
-                            task.get('title')])
+    with open(f"{user_id}.csv", "w", newline="") as csvfile:
+        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+        [writer.writerow(
+            [user_id, user_name, task.get("completed"), task.get("title")]
+         ) for task in todos]
