@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     url = "https://jsonplaceholder.typicode.com"
     user = requests.get(f"{url}/users/{user_id}").json()
-    todos = requests.get(f"{url}/todos/",
+    todos = requests.get(f"{url}/todos",
                          params={"userId": user_id}).json()
     user_name = user.get('username')
     file_name = f"{user_id}.csv"
