@@ -4,7 +4,7 @@
     Records all tasks that are owned by an employee
 """
 
-import csv
+import json
 import requests
 import sys
 
@@ -16,12 +16,10 @@ if __name__ == "__main__":
     todos = requests.get(f"{url}/todos/",
                          params={"userId": user_id}).json()
     user_name = user.get('username')
-    file_name = f"{user_id}.csv"
+    file_name = f"{user_id}.json"
 
     with open(file_name, 'w', newline="") as file:
-        writer = csv.writer(file, quoting=csv.QUOTE_ALL)
-
-        for task in todos:
-            writer.writerow([user_id, user_name,
-                            task.get('completed'),
-                            task.get('title')])
+        json.dump({user_id:
+                  [{"task": task.get('title'),
+                    "completed": task.get('completed'),
+                    "username": user_name} for task in todos]}, file)
