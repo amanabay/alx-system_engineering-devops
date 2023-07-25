@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    Python script to export data in the CSV format.
+    Python script to export data in the JSON format.
     Records all tasks that are owned by an employee
 """
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     user_name = user.get('username')
     file_name = f"{user_id}.json"
 
-    with open(file_name, 'w', newline="") as file:
+    with open(file_name, 'w') as file:
         json.dump({user_id:
                   [{"task": task.get('title'),
                     "completed": task.get('completed'),
