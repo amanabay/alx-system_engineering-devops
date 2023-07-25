@@ -9,15 +9,14 @@ import requests
 
 if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com"
-    users = requests.get(f"{url}/users/").json()
-    todos = requests.get(f"{url}/todos").json()
+    users = requests.get(f"{url}/users").json()
 
     file_name = "todo_all_employees.json"
     with open(file_name, 'w') as file:
         user_dict = {}
         for u in users:
             user_id = u.get("id")
-            todos = requests.get(url + "todos",
+            todos = requests.get(f"{url}/todos",
                                  params={"userId": user_id}).json()
             tasks_list = []
             for task in todos:
@@ -27,6 +26,6 @@ if __name__ == "__main__":
                     "username": u.get("username")
                 }
                 tasks_list.append(task_dict)
-        user_dict[user_id] = tasks_list
+            user_dict[user_id] = tasks_list
 
         json.dump(user_dict, file)
