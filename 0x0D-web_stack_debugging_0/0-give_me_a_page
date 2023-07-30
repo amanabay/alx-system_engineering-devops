@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # Start the apache2 service on container
-service apache2 start
+echo "ServerName localhost" | sudo tee /etc/apache2.conf
+sudo service apache2 start
