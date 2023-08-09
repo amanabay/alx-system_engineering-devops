@@ -15,7 +15,7 @@ def top_ten(subreddit):
             subreddit(str): Name of subreddit
     """
     url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
-    response = requests.get(url)
+    response = requests.get(url, allow_redirects=False)
 
     if response.status_code == 200:
         data = response.json()
