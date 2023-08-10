@@ -13,6 +13,9 @@ def number_of_subscribers(subreddit):
         Args:
             subreddit(str): Name of subreddit
     """
+    if subreddit is None or type(subreddit) is not str:
+        return 0
+
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
 
     response = requests.get(url, allow_redirects=False)
