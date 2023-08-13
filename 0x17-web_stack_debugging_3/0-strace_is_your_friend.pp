@@ -1,10 +1,7 @@
-file { '/var/www/html/wp-settings.php':
-  ensure => present,
-}
+# Fix wp-settings.php by replace wrong extension(phpp) by php
 
-file_line { 'replace_line':
-  ensure => present,
-  line   => "require_once( ABSPATH . WPINC . '/class-wp-locale.phpp' );",
-  match  => "require_once( ABSPATH . WPINC . '/class-wp-locale.php' );",
-  path   => '/var/www/html/wp-settings.php',
+exec { 'replace_phpp':
+  command => "sed -i 's/phpp/php/g' /var/www/html/wp-settings.php",
+  path => ['/usr/bin/']
+
 }
